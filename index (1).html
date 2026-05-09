@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Gatsby Blueprint — Open Mind Silhouette Project</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #0a0a0a;
+    color: #e8e0cc;
+    font-family: 'DM Mono', monospace;
+    min-height: 100vh;
+    padding: 2rem 1rem;
+  }
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    background: #0d0d0d;
+    border-radius: 16px;
+    padding: 2.5rem 2rem;
+    border: 0.5px solid #1e1a14;
+  }
+  .bp-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: #c9a84c;
+    letter-spacing: 0.02em;
+    margin-bottom: 4px;
+  }
+  .bp-subtitle {
+    font-size: 11px;
+    color: #6b6355;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 2.5rem;
+  }
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #c9a84c;
+    margin: 2rem 0 0.75rem;
+    border-left: 2px solid #c9a84c;
+    padding-left: 10px;
+  }
+  .bleed-box {
+    background: linear-gradient(90deg, #1a1508 0%, #111 100%);
+    border: 1px solid #2a2520;
+    border-radius: 8px;
+    padding: 1.25rem;
+    font-size: 12px;
+    color: #b8af9e;
+    line-height: 1.8;
+  }
+  .bleed-box strong { color: #c9a84c; font-weight: 500; }
+  .split-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    border: 1px solid #2a2520;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .half { padding: 1.25rem; }
+  .half-dream { background: #1a1508; }
+  .half-reality { background: #0e0e0e; }
+  .half-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .half-title.gold { color: #c9a84c; }
+  .half-title.ash { color: #888; }
+  .half-sub { font-size: 10px; color: #5a5048; margin-bottom: 1rem; }
+  .symbol-list { list-style: none; }
+  .symbol-list li {
+    font-size: 11px;
+    padding: 7px 0;
+    border-bottom: 0.5px solid #1e1a14;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    line-height: 1.5;
+  }
+  .half-reality .symbol-list li { border-bottom: 0.5px solid #1a1a1a; }
+  .sym-icon { font-size: 14px; flex-shrink: 0; width: 20px; }
+  .sym-text { color: #b8af9e; }
+  .sym-meaning { font-size: 10px; color: #5a5048; display: block; margin-top: 2px; }
+  .half-reality .sym-meaning { color: #454545; }
+  .outside-box {
+    background: #0a0d12;
+    border: 1px solid #1a2030;
+    border-radius: 8px;
+    padding: 1.25rem;
+  }
+  .outside-list { list-style: none; }
+  .outside-list li {
+    font-size: 12px;
+    padding: 7px 0;
+    border-bottom: 0.5px solid #141a24;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    line-height: 1.5;
+    color: #8899bb;
+  }
+  .palette-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
+  .swatch { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+  .swatch-block { width: 52px; height: 52px; border-radius: 8px; }
+  .swatch-label { font-size: 9px; color: #5a5048; text-align: center; line-height: 1.4; }
+  .phrase-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+  .phrase-chip {
+    background: #1a1508;
+    border: 0.5px solid #3a2e10;
+    border-radius: 4px;
+    padding: 4px 12px;
+    font-size: 11px;
+    color: #c9a84c;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+  }
+  .materials-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .mat-card {
+    background: #111;
+    border: 0.5px solid #222;
+    border-radius: 8px;
+    padding: 1rem;
+  }
+  .mat-zone {
+    font-size: 10px;
+    color: #c9a84c;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    font-weight: 500;
+  }
+  .mat-items { font-size: 11px; color: #7a7268; line-height: 1.8; }
+  .score-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+  }
+  .score-card {
+    background: #111;
+    border: 0.5px solid #222;
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+  }
+  .score-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: #c9a84c;
+    font-weight: 700;
+    display: block;
+  }
+  .score-cat { font-size: 10px; color: #5a5048; line-height: 1.4; display: block; margin-top: 2px; }
+  .score-tips { font-size: 10px; color: #7a7268; margin-top: 8px; line-height: 1.6; text-align: left; }
+  .divider { border: none; border-top: 0.5px solid #1e1a14; margin: 2rem 0 1rem; }
+  .footer { font-size: 10px; color: #3a3530; letter-spacing: 0.1em; text-transform: uppercase; }
+  @media (max-width: 600px) {
+    .split-grid { grid-template-columns: 1fr; }
+    .materials-grid { grid-template-columns: 1fr; }
+    .score-grid { grid-template-columns: 1fr; }
+    .bp-title { font-size: 26px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <p class="bp-title">The Gatsby Blueprint</p>
+  <p class="bp-subtitle">Open Mind Silhouette — Complete Execution Guide — English 3</p>
+
+  <p class="section-label">The core concept</p>
+  <div class="bleed-box">
+    The silhouette is split <strong>vertically down the center</strong> — two worlds inside one head. The left half represents <strong>the dream</strong> (who Gatsby performs himself to be). The right half represents <strong>the reality</strong> (what the dream costs and conceals). The split line is not clean — it <strong>bleeds and smears</strong> into each other, gold into grey, because Gatsby himself could not keep those worlds separated. That bleed edge is your mom's mixed media playground. Use it.
+  </div>
+
+  <p class="section-label">Inside the silhouette</p>
+  <div class="split-grid">
+    <div class="half half-dream">
+      <p class="half-title gold">Left half — the dream</p>
+      <p class="half-sub">gold · emerald · ivory · warm cream</p>
+      <ul class="symbol-list">
+        <li><span class="sym-icon">🟢</span><span class="sym-text">The green light<span class="sym-meaning">The most iconic Gatsby symbol — his whole dream compressed into one point of light across the water</span></span></li>
+        <li><span class="sym-icon">👔</span><span class="sym-text">Cascading gold shirts<span class="sym-meaning">The scene where he throws shirts at Daisy — the performance of wealth, the need to be seen</span></span></li>
+        <li><span class="sym-icon">🏛️</span><span class="sym-text">White mansion facade<span class="sym-meaning">West Egg grandeur — everything built to impress one person</span></span></li>
+        <li><span class="sym-icon">🕰️</span><span class="sym-text">A stopped clock<span class="sym-meaning">When he almost knocks Nick's clock — his obsession with repeating the past, freezing time at 1917</span></span></li>
+        <li><span class="sym-icon">🍾</span><span class="sym-text">Champagne glasses, music notes<span class="sym-meaning">The parties — noise covering the emptiness, thrown for an audience of one who never came</span></span></li>
+        <li><span class="sym-icon">⭐</span><span class="sym-text">Stars and light rays<span class="sym-meaning">The extraordinary gift for hope — Fitzgerald's final words about the green light</span></span></li>
+        <li><span class="sym-icon">✍️</span><span class="sym-text">"Old Sport" faint in background<span class="sym-meaning">Repeated phrase — the performance of old money class he never possessed</span></span></li>
+      </ul>
+    </div>
+    <div class="half half-reality">
+      <p class="half-title ash">Right half — the reality</p>
+      <p class="half-sub">ash grey · dirty white · muted yellow · black</p>
+      <ul class="symbol-list">
+        <li><span class="sym-icon">👁️</span><span class="sym-text">The eyes of Doctor T.J. Eckleburg<span class="sym-meaning">The billboard — god watching over a moral wasteland, seeing everything Gatsby pretends is unseen</span></span></li>
+        <li><span class="sym-icon">🌫️</span><span class="sym-text">Valley of Ashes — grey dust, grey figures<span class="sym-meaning">The cost of the dream — the people ground into ash by old money's indifference</span></span></li>
+        <li><span class="sym-icon">🚗</span><span class="sym-text">The yellow car (not gold — yellow)<span class="sym-meaning">Death machine. Daisy was driving. Gatsby took the blame. The dream destroyed everything it touched.</span></span></li>
+        <li><span class="sym-icon">💧</span><span class="sym-text">The pool — still, dark water<span class="sym-meaning">Where he dies waiting for a call from Daisy that never comes</span></span></li>
+        <li><span class="sym-icon">🪑</span><span class="sym-text">Empty chairs, empty funeral<span class="sym-meaning">Only Nick came — thousands at the parties, nobody at his death. The dream's real verdict.</span></span></li>
+        <li><span class="sym-icon">💀</span><span class="sym-text">A crumbling version of the mansion<span class="sym-meaning">Same building as the left side — decayed. What was always underneath the performance.</span></span></li>
+        <li><span class="sym-icon">🌑</span><span class="sym-text">James Gatz's name — small, fading<span class="sym-meaning">Who he actually was before the invention — the person he abandoned and could never escape</span></span></li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="section-label">The bleed edge — where the halves meet</p>
+  <div class="bleed-box">
+    This is the most important technical decision in the piece. The center line where gold meets ash should <strong>not be a hard edge</strong>. Have your mom use wet-on-wet technique, or dry brush, or ink bleed — something that lets the colors seep into each other 1–2 inches on each side of center. The green light exists on both sides but <strong>fades from vivid to dull as it crosses right</strong>. The mansion appears on both sides — beautiful on the left, crumbling on the right. That's the thesis of the book made visual.
+  </div>
+
+  <p class="section-label">Outside the silhouette</p>
+  <div class="outside-box">
+    <ul class="outside-list">
+      <li><span class="sym-icon">🌊</span>Dark navy/black background — East Egg and West Egg water at night. Deep, cold, separating.</li>
+      <li><span class="sym-icon">🟢</span>One small green light glowing OUTSIDE the silhouette, at the bottom right edge — reaching inward toward his head. The dream exists outside of him, unreachable.</li>
+      <li><span class="sym-icon">🌉</span>Faint dock shape at the bottom of the silhouette — where Gatsby stood and reached toward the light.</li>
+      <li><span class="sym-icon">🌙</span>Optional: faint gold line tracing the silhouette's edge — the outline of the performance, not the person.</li>
+    </ul>
+  </div>
+
+  <p class="section-label">Color palette</p>
+  <div class="palette-row">
+    <div class="swatch"><div class="swatch-block" style="background:#c9a84c;"></div><p class="swatch-label">Dream gold<br>shirts, stars</p></div>
+    <div class="swatch"><div class="swatch-block" style="background:#1a4a2a;"></div><p class="swatch-label">Green light<br>left side</p></div>
+    <div class="swatch"><div class="swatch-block" style="background:#4a6640;"></div><p class="swatch-label">Faded green<br>right side</p></div>
+    <div class="swatch"><div class="swatch-block" style="background:#f5f0e8;"></div><p class="swatch-label">Ivory<br>mansion, shirts</p></div>
+    <div class="swatch"><div class="swatch-block" style="background:#8a8278;"></div><p class="swatch-label">Valley ash<br>grey figures</p></div>
+    <div class="swatch"><div class="swatch-block" style="background:#3d3830;"></div><p class="swatch-label">Dark ash<br>right bg</p></div>
+    <div class="swatch"><div class="swatch-block" style="background:#c9b84a;"></div><p class="swatch-label">Yellow car<br>dirty yellow</p></div>
+    <div class="swatch"><div class="swatch-block" style="background:#0d1a2e;"></div><p class="swatch-label">Night water<br>outside bg</p></div>
+    <div class="swatch"><div class="swatch-block" style="background:#1a0e05;"></div><p class="swatch-label">Left bg<br>warm black</p></div>
+  </div>
+
+  <p class="section-label">Optional phrases inside — use sparingly</p>
+  <div class="phrase-row">
+    <span class="phrase-chip">"Old Sport"</span>
+    <span class="phrase-chip">"Can't repeat the past?"</span>
+    <span class="phrase-chip">James Gatz</span>
+    <span class="phrase-chip">"Her voice is full of money"</span>
+    <span class="phrase-chip">1917</span>
+    <span class="phrase-chip">"So we beat on"</span>
+  </div>
+
+  <p class="section-label">Materials for your mom</p>
+  <div class="materials-grid">
+    <div class="mat-card">
+      <p class="mat-zone">Left half — dream</p>
+      <p class="mat-items">Gold/metallic acrylic or watercolor<br>Warm wash base layer<br>Pressed gold leaf accents on shirts<br>Soft pencil for music notes</p>
+    </div>
+    <div class="mat-card">
+      <p class="mat-zone">Right half — reality</p>
+      <p class="mat-items">Charcoal or graphite wash<br>Dry brush grey acrylic<br>Black ink for Eckleburg eyes<br>Ash texture — actual grey watercolor</p>
+    </div>
+    <div class="mat-card">
+      <p class="mat-zone">The bleed edge</p>
+      <p class="mat-items">Wet-on-wet watercolor or alcohol ink<br>Let gold and grey seep into each other<br>Don't control it — let it bleed naturally</p>
+    </div>
+    <div class="mat-card">
+      <p class="mat-zone">Outside background</p>
+      <p class="mat-items">Dark navy acrylic base<br>Subtle ripple lines for water<br>Small dot of green — the light<br>Keep it dark, minimal, still</p>
+    </div>
+  </div>
+
+  <p class="section-label">Grading — how to guarantee all 30 points</p>
+  <div class="score-grid">
+    <div class="score-card">
+      <span class="score-num">10</span>
+      <span class="score-cat">Story connection</span>
+      <p class="score-tips">Green light, Eckleburg eyes, yellow car, the pool, the clock — any teacher who read the book will recognize these instantly. The split itself argues the novel's central thesis.</p>
+    </div>
+    <div class="score-card">
+      <span class="score-num">10</span>
+      <span class="score-cat">Creativity & design</span>
+      <p class="score-tips">The bleed edge technique, mixed media layers, gold leaf, and the outside green light make this look nothing like a student project.</p>
+    </div>
+    <div class="score-card">
+      <span class="score-num">10</span>
+      <span class="score-cat">Symbolism & themes</span>
+      <p class="score-tips">Every symbol maps to a theme — illusion vs reality, old money vs new, the impossibility of repeating the past. Meaning is embedded, not decorative.</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+  <p class="footer">Due 5/12 · Character: Jay Gatsby · 8.5" × 11" minimum · Hand-drawn required</p>
+</div>
+</body>
+</html>
