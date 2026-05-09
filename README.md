@@ -1,1 +1,0 @@
-# Gatsby-Art-Blueprint
